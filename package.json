@@ -1,0 +1,13 @@
+{
+  "name": "module27-restapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Bartosz Janiak <janiak.bartosz92@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
