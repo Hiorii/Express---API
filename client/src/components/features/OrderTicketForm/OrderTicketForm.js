@@ -21,7 +21,6 @@ class OrderTicketForm extends React.Component {
   componentDidMount() {
     const { loadSeats } = this.props;
     const interval = setInterval(()=> {
-      loadSeats();
     },120000);
     this.setState({
       interval: interval,
@@ -64,8 +63,7 @@ class OrderTicketForm extends React.Component {
 
     if(order.client && order.email && order.day && order.seat) {
       await addSeat(order);
-      loadSeats();
-      this.setState({ 
+      this.setState({
         order: {
           client: '',
           email: '',

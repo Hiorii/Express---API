@@ -22,7 +22,7 @@ router.route('/seats').post((req,res)=> {
             client: client,
             email: email,
         });
-        res.json({ message: 'OK' });
+        req.io.emit('seatsUpdated', db.db.seats);
     } else {
         res.status(409).json({message: "The slot is already taken..."});
     }
@@ -33,7 +33,7 @@ router.route('/seats/:id').put((req,res)=> {
     const id = parseInt(req.params.id);
     const editedItem = db.db.seats.find(seat => seat.id === id);
     const indexOfEditedItem = db.db.seats.indexOf(editedItem);
-
+    
     db.db.seats[indexOfEditedItem] = {
         ...editedItem,
         day: day,
