@@ -3,9 +3,20 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 const socket = require('socket.io');
+const mongoose = require('mongoose');
 
-const server = app.listen(8000, ()=> {
-    console.log('Server connected');
+mongoose.connect('mongodb+srv://Hiorii:@CPItT8MVK@cluster0.g9pgz.mongodb.net/new_wave?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+const db = mongoose.connection;
+
+db.once('open', ()=> {
+    console.log('Connected to the database');
+});
+db.on('error', (err) => {
+    console.log(`Error:  ${err}`)
+});
+
+const server = app.listen(process.env.PORT || 8000, () => {
+    console.log('Server is running on port: 8000');
 });
 
 const io = socket(server, {
@@ -29,6 +40,10 @@ app.use((req, res, next) => {
 app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
 app.use('/api', seatsRoutes);
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
 
 io.on('connection', (socket)=> {
     console.log('New socket!');
