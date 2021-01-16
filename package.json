@@ -1,7 +1,7 @@
 {
   "name": "module27-restapi",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "author": "Bartosz Janiak <janiak.bartosz92@gmail.com>",
   "license": "MIT",
   "scripts": {
