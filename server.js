@@ -30,7 +30,7 @@ const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
 
 app.use(cors());
-app.use(express.static(path.join(__dirname + '/client/public')));
+app.use(express.static(path.join(__dirname + '/client/build')));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use((req, res, next) => {
