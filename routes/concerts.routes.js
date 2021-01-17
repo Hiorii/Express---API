@@ -12,7 +12,7 @@ router.get('/concerts/genre/:genre', ConcertsController.getByGenre);
 
 router.get('/concerts/price/:price_min/:price_max', ConcertsController.getByPrice);
 
-router.get('/concerts/price/day/:day', ConcertsController.getByDay);
+router.get('/concerts/day/:day', ConcertsController.getByDay);
 
 router.post('/concerts', ConcertsController.addNew);
 
