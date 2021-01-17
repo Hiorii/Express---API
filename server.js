@@ -5,7 +5,9 @@ const cors = require('cors');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://Hiorii:@CPItT8MVK@cluster0.g9pgz.mongodb.net/new_wave?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+const dbURI = process.env.NODE_ENV === 'production' ? `mongodb+srv://Hiorii:@CPItT8MVK@cluster0.g9pgz.mongodb.net/new_wave?retryWrites=true&w=majority` : 'mongodb://localhost:27017/NewWaveDB';
+
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 
 db.once('open', ()=> {
@@ -52,3 +54,5 @@ io.on('connection', (socket)=> {
 app.use((req,res)=> {
     res.status(404).send('Error 404...')
 });
+
+module.exports = server;
