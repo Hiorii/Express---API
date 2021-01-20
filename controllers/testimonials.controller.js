@@ -1,3 +1,4 @@
+const sanitize = require('mongo-sanitize');
 const Testimonial = require('../models/testimonials.model');
 
 exports.getAll = async(req,res) => {
@@ -23,12 +24,17 @@ exports.getById = async(req,res) => {
 exports.addNew = async(req,res) => {
     const {author, text} = req.body;
     try {
-        const newTes = new Testimonial({
-            author: author,
-            text: text,
-        })
-        await newTes.save();
-        res.json(newTes);
+        if (!author || !author.length || !text || !text.length) throw new Error('Data is not correct!');
+        else {
+            const cleanAuthor = sanitize(author);
+            const cleanText = sanitize(text);
+            const newTes = new Testimonial({
+                author: cleanAuthor,
+                text: cleanText,
+            })
+            await newTes.save();
+            res.json(newTes);
+        }
     } catch (err) {
         res.status(500).json({message: err});
     }
